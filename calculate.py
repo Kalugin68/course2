@@ -1,6 +1,6 @@
-import tkinter as tk
 import tkinter
 from tkinter import messagebox
+import customtkinter as ctk
 
 
 class CalculateNumbers:
@@ -106,9 +106,9 @@ class CalculateNumbers:
             else:
                 raise ValueError
 
-            self.output_entry.config(state="normal")
-            self.output_entry.delete(0, tk.END)
+            self.output_entry.configure(state="normal")
+            self.output_entry.delete(0, ctk.END)
             self.output_entry.insert(0, conversion_result)  # Now using conversion_result
-            self.output_entry.config(state="readonly")
+            self.output_entry.configure(state="readonly")
         except ValueError:
             tkinter.messagebox.showerror("Ошибка", "Некорректный ввод или система счисления")

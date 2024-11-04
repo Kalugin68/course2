@@ -1,14 +1,12 @@
-from tkinter import *
-from tkinter import ttk
-from PIL import Image, ImageTk
-
+from PIL import Image
+import customtkinter as ctk
 
 class AuthorWindow:
     def __init__(self, master, main_window):
         self.master = master
         self.main_window = main_window
 
-        self.author_window = Toplevel()
+        self.author_window = ctk.CTkToplevel()
         self.author_window.title("Конвертер чисел и системы счисления")
 
         # Получаем размеры экрана
@@ -24,34 +22,27 @@ class AuthorWindow:
 
         # Считывание и форматирование изображения
         self.image_author = Image.open("images/author.jpg")
-        new_width = int(self.image_author.width / 3)  # Уменьшаем ширину в 4 раза
-        new_height = int(self.image_author.height / 3)  # Уменьшаем высоту в 4 раза
-        self.image_author_resized = self.image_author.resize((new_width, new_height))
-        self.photo_author = ImageTk.PhotoImage(self.image_author_resized)
+        self.photo_author = ctk.CTkImage(light_image=self.image_author, dark_image=self.image_author,
+                                       size=(320, 426))
 
         # Создание изображения
-        self.image_label = ttk.Label(self.author_window, image=self.photo_author)
+        self.image_label = ctk.CTkLabel(self.author_window, image=self.photo_author, text="")
         self.image_label.image = self.photo_author  # Чтобы картинка не исчезала
         self.image_label.pack(pady=10)
 
         # Информация об авторе
-        self.label_author = ttk.Label(self.author_window, text="Автор", font=("Arial", 14))
+        self.label_author = ctk.CTkLabel(self.author_window, text="Автор", font=("Calibri", 18))
         self.label_author.pack()
-        self.label_groop = ttk.Label(self.author_window, text="Студент группы 10701223", font=("Arial", 14))
+        self.label_groop = ctk.CTkLabel(self.author_window, text="Студент группы 10701223", font=("Calibri", 18))
         self.label_groop.pack()
-        self.label_name = ttk.Label(self.author_window, text="Калугин Александр Андреевич", font=("Arial", 14))
+        self.label_name = ctk.CTkLabel(self.author_window, text="Калугин Александр Андреевич", font=("Calibri", 18))
         self.label_name.pack()
-        self.label_mail = ttk.Label(self.author_window, text="sashakalugin74@gmail.com", font=("Arial", 14))
+        self.label_mail = ctk.CTkLabel(self.author_window, text="sashakalugin74@gmail.com", font=("Calibri", 18))
         self.label_mail.pack()
 
-        # Создаем объект стиля
-        self.style = ttk.Style()
-        # Задаем стили для кнопки
-        self.style.configure("Author.TButton", font=("Calibri", 10), padding=(15, 3))
-
         # Кнопка назад
-        self.back_button = ttk.Button(self.author_window, text="Назад",
-                                      command=self.back_button_clicked, style="Author.TButton")
+        self.back_button = ctk.CTkButton(self.author_window, text="Назад",
+                                         command=self.back_button_clicked)
         self.back_button.pack(pady=15, padx=15)
 
     def back_button_clicked(self):
